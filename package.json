@@ -1,0 +1,27 @@
+{
+    "name": "mp_project_transform",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "node run test",
+        "ali2wx": "node run index"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/suuuuuuuuperman/mpProjectTransform.git"
+    },
+    "keywords": [
+        "mpProjectTransform"
+    ],
+    "author": "alfredo wong",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/suuuuuuuuperman/mpProjectTransform/issues"
+    },
+    "homepage": "https://github.com/suuuuuuuuperman/mpProjectTransform#readme",
+    "dependencies": {
+        "fs": "0.0.1-security",
+        "mp_xml_transform": "0.0.2"
+    }
+}
