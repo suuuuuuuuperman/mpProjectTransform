@@ -30,17 +30,24 @@ function walk(fromPath, toPath) {
         var name = fileList[index];
         var filePath = path.resolve(fromPath, name);
 
-        // 更换文件名称
-        var toFilePath = path.resolve(toPath, name.replace(/\.axml$/, '.wxml').replace(/\.acss$/, '.wxss'));
         if (isUnwanted(name)) {
             continue;
         }
+
+        // 更换文件名称
+        var toFilePath = path.resolve(toPath, name.replace(/\.axml$/, '.wxml').replace(/\.acss$/, '.wxss'));
+
+        // 如果是目录，继续递归遍历
         if (fs.lstatSync(filePath).isDirectory()) {
             fs.mkdirSync(toFilePath);
             walk(filePath, toFilePath);
-        } else {
+        }
+
+        // 如果是文件，直接文件转换
+        else {
             fileTransform.to(filePath, toFilePath, type)
-                // fs.createReadStream(filePath).pipe(fs.createWriteStream(toFilePath));
+
+            // fs.createReadStream(filePath).pipe(fs.createWriteStream(toFilePath));
         }
     }
 }
