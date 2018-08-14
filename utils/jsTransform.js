@@ -4,6 +4,7 @@ let CONF_MAP = require("../config/jsMap");
 // 文件限制
 const promisePath = "utils/blueBird.js";
 const runtimePath = "utils/regenerator-runtime/runtime-module.js";
+const runtimeDirPath = "utils/regenerator-runtime";
 const ofoTrackPath = "utils/ofotrack-app.js";
 const ofoTrackPath2 = "utils/ofotrack-conf.js";
 
@@ -11,6 +12,7 @@ const ofoTrackPath2 = "utils/ofotrack-conf.js";
 const noPromiseAndAsyncFiles = [
     promisePath,
     runtimePath,
+    runtimeDirPath,
     ofoTrackPath,
     ofoTrackPath2
 ];
@@ -92,7 +94,6 @@ function jsTransform(from, to, file, type) {
     // 三方sdk不加入，不加入regenerator-runtime和promise等兼容包
     if (noPromiseAndAsyncFiles.indexOf(from1) == -1 && from1.indexOf("regenerator-runtime") == -1) {
         file = `import regeneratorRuntime from "${relativePath + runtimePath}";\n` + file;
-        // file = `require("${relativePath + runtimePath}");\n` + file;
         file = file.replace(/my\./g, 'wx.');
     }
 

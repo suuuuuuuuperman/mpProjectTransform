@@ -21,8 +21,6 @@ const typeTips = {
 let fromType = type.split("2")[0];
 let toType = type.split("2")[1];
 
-let category = {};
-
 function walk(fromPath, toPath) {
     var fileList = fs.readdirSync(fromPath);
     // console.log("文件名称：", fileList, fromPath);
@@ -73,8 +71,9 @@ function initTransfer() {
         shelljs.rm('-rf', toPath);
         console.log("直接删除; 等待转换");
     }
-    console.log(`正常转换...`);
+    console.log(`创建目标目录...`);
     fs.mkdirSync(toPath);
+    console.log(`正常转换...`);
     walk(fromPath, toPath);
     console.log("=================== 转化结束 ==================");
     console.log("===============================================");
