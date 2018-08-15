@@ -5,7 +5,7 @@ var jsonTransform = require("./jsonTransform");
 var cssTransform = require("./cssTransform");
 var jsTransform = require("./jsTransform");
 
-function to(from, to, type) {
+function fileTransform(from, to, type, rootDir) {
     file = fs.readFileSync(from, 'utf8');
 
     // xml文件内容替换
@@ -19,17 +19,17 @@ function to(from, to, type) {
 
     // js文件内容替换
     else if (/\.js$/i.test(from)) {
-        return jsTransform(from, to, file, type);
+        return jsTransform(from, to, file, type, rootDir);
     }
 
     // json文件内容配置
     else if (/\.json$/i.test(from)) {
-        return jsonTransform(to, file, type);
+        return jsonTransform(to, file, type, rootDir);
     }
 
     // css文件内容替换
     else if (/\.acss$/i.test(from)) {
-        return cssTransform(to, file, type);
+        return cssTransform(to, file, type, rootDir);
     }
 
     // 其他直接写入复制
@@ -37,6 +37,4 @@ function to(from, to, type) {
         shelljs.cp(from, to);
     }
 }
-module.exports = {
-    to: to
-}
+module.exports = fileTransform;

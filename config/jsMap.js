@@ -5,8 +5,6 @@
  * @ warning 
  */
 
-console.log("jsMap running");
-
 // 默认 JS 配置及描述
 const DEFAULT_JS_CONF = {
     "customTagEvtPrefix": {

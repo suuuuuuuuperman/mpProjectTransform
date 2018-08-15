@@ -49,8 +49,32 @@ function targetMatching(type) {
 
 let flag = true;
 
+function getRelativePathInfo(absPath, rootDir) {
+    let relativePath = absPath.split(`/${rootDir}/`) && absPath.split(`/${rootDir}/`)[1];
+    if (!relativePath) {
+        console.log("获取相对路径异常：absPath ", absPath, " rootDir: ", rootDir);
+        return false;
+    }
+    let depth = relativePath.split('/').length - 1;
+    let relativePathPrefix = "";
+
+    if (depth == 0) {
+        relativePathPrefix = "./";
+    } else {
+        for (let i = 0; i < depth; i++) {
+            relativePathPrefix += "../";
+        }
+    }
+
+    return {
+        relativePath,
+        depth,
+        relativePathPrefix
+    };
+}
+
 // 文件编译转换
-function jsTransform(from, to, file, type) {
+function jsTransform(from, to, file, type, rootDir) {
     // 期望map关系
     let targetMap = targetMatching(type);
 
@@ -62,7 +86,7 @@ function jsTransform(from, to, file, type) {
 
     // 调试
     if (flag) {
-        console.log("targetMap: ", JSON.stringify(targetMap));
+        // console.log("targetMap: ", JSON.stringify(targetMap));
         flag = false;
     }
 
@@ -73,27 +97,18 @@ function jsTransform(from, to, file, type) {
     }
 
     // ================================================
-    // ================================================
-    // 确认当前项目的根目录
-    // let from1 = from.split("zhifubao_app/ofo/")[1];
-    let from1 = from.split("weapp_ofo/ofo_common_mp/")[1];
+    // 需要插入内容
+    // 获取file相对路径名称
+    var relativePathObj = getRelativePathInfo(from, rootDir);
 
-    // 当前路径相对根目录的层级
-    let length = from1.split('/').length - 1;
-
-    // 相对路径
-    let relativePath = "";
-    if (length == 0) {
-        relativePath = "./";
-    } else {
-        for (let i = 0; i < length; i++) {
-            relativePath += "../";
-        }
-    }
+    const {
+        relativePath,
+        relativePathPrefix
+    } = relativePathObj;
 
     // 三方sdk不加入，不加入regenerator-runtime和promise等兼容包
-    if (noPromiseAndAsyncFiles.indexOf(from1) == -1 && from1.indexOf("regenerator-runtime") == -1) {
-        file = `import regeneratorRuntime from "${relativePath + runtimePath}";\n` + file;
+    if (noPromiseAndAsyncFiles.indexOf(relativePath) == -1 && relativePath.indexOf("regenerator-runtime") == -1) {
+        file = `import regeneratorRuntime from "${relativePathPrefix + runtimePath}";\n` + file;
         file = file.replace(/my\./g, 'wx.');
     }
 

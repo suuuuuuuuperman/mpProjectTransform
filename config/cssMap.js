@@ -5,8 +5,6 @@
  * @ warning 
  */
 
-console.log("cssMap running");
-
 // 默认 JSON 配置及描述
 const DEFAULT_CSS_CONF = {
     "fileSuffix": {

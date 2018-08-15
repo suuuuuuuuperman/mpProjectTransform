@@ -46,7 +46,7 @@ function cssTransform(to, file, type) {
 
     // 调试
     if (flag) {
-        console.log("targetMap: ", JSON.stringify(targetMap));
+        // console.log("targetMap: ", JSON.stringify(targetMap));
         flag = false;
     }
 

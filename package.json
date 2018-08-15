@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "test": "node run test",
-        "ali2wx": "node run index"
+        "ali2wx": "node index",
+        "ofoAli2wx": "node index /Users/huangchao/Desktop/ofo/weapp_ofo/ofo_common_mp /Users/huangchao/Desktop/ofo/weapp_ofo/zhifubao_app/ofo_wx ali2wx",
+        "ofoWx2ali": "node index /Users/huangchao/Desktop/ofo/weapp_ofo/ofo_common_mp /Users/huangchao/Desktop/ofo/weapp_ofo/zhifubao_app/ofo_wx wx2ali"
     },
     "repository": {
         "type": "git",

@@ -5,7 +5,6 @@
  * @ warning 部分属性不支持，部分属性类型不统一，部分属性可能会出现「局部」匹配，需要注意。
  */
 
-console.log("jsonMap running");
 // 默认 JSON 配置及描述
 const DEFAULT_JSON_CONF = {
     "navigationBarTitleText": {
