@@ -28,7 +28,6 @@ let toType = type.split("2")[1];
 // 遍历
 function goThrough(fromPath, toPath) {
     var fileList = fs.readdirSync(fromPath);
-    // console.log("文件名称：", fileList, fromPath);
     for (var index = 0; index < fileList.length; index++) {
         var name = fileList[index];
         var filePath = path.resolve(fromPath, name);
